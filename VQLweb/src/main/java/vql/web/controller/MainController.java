@@ -1,4 +1,4 @@
-package controller;
+package vql.web.controller;
 
 import java.util.Locale;
 
@@ -12,8 +12,7 @@ public class MainController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		model.addAttribute("main");
-		
-		return "home";
+
+		return "main";
 	}
 }
