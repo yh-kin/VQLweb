@@ -29,7 +29,7 @@
 <body>
 
 	<div class="page-header text-center">
-	  <h1>VQLweb<small>(ver.2015041200)</small></h1>
+	  <h1>VQLweb<small> (ver.${version})</small></h1>
 	</div>
 	
 	<div>
