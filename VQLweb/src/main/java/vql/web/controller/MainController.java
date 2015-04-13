@@ -1,12 +1,18 @@
 package vql.web.controller;
 
-import java.util.Locale;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import queryParser.Comm.QueryCommVar;
+import queryParser.vo.QueryFactory;
+import vql.web.service.VisualizeService;
 
 @Controller
 public class MainController {
@@ -17,11 +23,35 @@ public class MainController {
 	 * 참고해 볼 것.
 	 */
 	
-	@RequestMapping("/main")
-	public ModelAndView home(Locale locale, Model model) {
+	@RequestMapping("/inputQuery")
+	public ModelAndView queryInput() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
 		
-		mv.addObject("version", "_testingVersionShow_");
+		mv.setViewName("inputQuery");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	public ModelAndView home(WebRequest webRequest, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
+		
+		String queryString = webRequest.getParameter("queryString");
+		
+		VisualizeService vs = new VisualizeService();
+		QueryFactory qf = null;
+		try {
+			qf = vs.getVisualQueryInfo(queryString);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String mainQuery_json = mapper.writeValueAsString(qf.getMainQueryInfo());
+			mv.addObject("mainQueryInfo", mainQuery_json);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		mv.setViewName("main");
 		
