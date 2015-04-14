@@ -44,14 +44,17 @@ public class MainController {
 		try {
 			qf = vs.getVisualQueryInfo(queryString);
 			
-			ObjectMapper mapper = new ObjectMapper();
-			String mainQuery_json = mapper.writeValueAsString(qf.getMainQueryInfo());
-			mv.addObject("mainQueryInfo", mainQuery_json);
+			String convertedQueryInfoString = vs.convertQueryInfoToMap(qf.getMainQueryInfo());
+			
+			mv.addObject("mainQueryInfo", convertedQueryInfoString);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// TODO 임시 확인용
+		mv.addObject("queryString", queryString);
 		
 		mv.setViewName("main");
 		

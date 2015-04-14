@@ -16,9 +16,13 @@
 
 <script src="js/drawing.js"></script>
 
+<link rel="stylesheet" href="css/element.css">
+
 <script>
+	var queryInfo = ${mainQueryInfo};
+
 	$(function(){
-		drawing_sampelCircle("myCanvas");
+		drawing_QueryInfo("visual_panel", queryInfo);
 	})
 </script>
 
@@ -36,8 +40,14 @@
 		${queryString}
 	</span>
 	
-	<div>
-		<canvas id="myCanvas" width="578" height="200"></canvas>
+	//
+	
+	<span>
+		${mainQueryInfo}
+	</span>
+	
+	<div id="visual_panel" style="position: relative;">
+		
 	</div>
 
 </body>

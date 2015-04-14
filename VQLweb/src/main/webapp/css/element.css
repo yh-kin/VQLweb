@@ -1,0 +1,10 @@
+div.element{
+	border-radius: 5px;
+	border: 3px solid black;
+	display: inline-block;
+	position: absolute;
+}
+
+div.select div.column{
+	text-align: center;
+}
