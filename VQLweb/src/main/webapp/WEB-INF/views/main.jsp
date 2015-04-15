@@ -57,15 +57,7 @@
 				</ul>
 			</div>
 		
-			<div class="col-md-10">
-			    <!-- Tab panes -->
-				<div class="tab-content">
-					<div class="tab-pane active" id="home"></div>
-					<div class="tab-pane" id="profile"></div>
-					<div class="tab-pane" id="messages"></div>
-					<div class="tab-pane" id="settings"></div>
-				</div>
-			</div> 
+			<div class="col-md-10"></div> 
 		</div>
 		
 		<div class="row col-md-3" style="background-color: orange;">
