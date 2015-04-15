@@ -18,6 +18,8 @@
 
 <link rel="stylesheet" href="css/element.css">
 
+<link rel="stylesheet" href="css/bootstrap.vertical-tabs.css">
+
 <script>
 	var queryInfo = ${mainQueryInfo};
 
@@ -40,16 +42,43 @@
 		${queryString}
 	</span>
 	
-	//
-	
-	<span>
-		${mainQueryInfo}
-	</span>
-	
-	<div id="visual_panel" style="position: relative;">
+	<div class="row">
+		<!--
+		<div id="visual_panel" class="container col-md-8" style="position: relative; background-color: red"></div>
+		-->
+		<div class="col-md-9">
+			<div class="col-md-2"> <!-- required for floating -->
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs tabs-left">
+					<li class="active"><a href="#home" data-toggle="tab">Main Query</a></li>
+					<li><a href="#profile" data-toggle="tab">01_SubQuery</a></li>
+					<li><a href="#messages" data-toggle="tab">02_SubQuery</a></li>
+					<li><a href="#settings" data-toggle="tab">03_SubQuery</a></li>
+				</ul>
+			</div>
 		
+			<div class="col-md-10">
+			    <!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="home"></div>
+					<div class="tab-pane" id="profile"></div>
+					<div class="tab-pane" id="messages"></div>
+					<div class="tab-pane" id="settings"></div>
+				</div>
+			</div> 
+		</div>
+		
+		<div class="row col-md-3" style="background-color: orange;">
+			<div id="query_tree" class="container" style="background-color: blue;"></div>
+			<div id="query_detail" class="container" style="background-color: green;"></div>
+		</div>
 	</div>
-
+	
+	
+	
+	
+	
+	
 </body>
 </html>
 
