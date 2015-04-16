@@ -19,12 +19,14 @@ function _SelectPainter (drawingPanel_param){
 	const ELEMENT_DEFAULT_OFFSET_X = 30;
 
 	var last_offset_x = ELEMENT_DEFAULT_OFFSET_X;
-	var last_offset_y = 10;
+	var last_offset_y = 40;
+	
+	var blockElementEndPosition_Y = 0;
 	
 	var drawingPanel = drawingPanel_param;
 	
-	this.getLastOffset_y = function(){
-		return last_offset_y;
+	this.getBlockEndPosition_Y = function(){
+		return blockElementEndPosition_Y;
 	}
 	
 	this.paint = function(infoList, block_offset_x, block_offset_y){
@@ -57,10 +59,11 @@ function _SelectPainter (drawingPanel_param){
 		blockElement.append("<div class=\"space\"></div>");
 
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
-		blockElement.offset({top: block_offset_x, left: block_offset_y});
+		blockElement.offset({top: block_offset_y, left: block_offset_x});
 		
-		$(blockElement).width(width);
-		$(blockElement).height(height);
+		// 최종 Element offset(Y) - Block 시작 offset(Y) + Element Height + Element 외부 margin(Y)
+		$(blockElement).height(last_offset_y - block_offset_y + ELEMENT_HEIGHT + ELEMENT_OUTER_MARGIN_Y);
+		blockElementEndPosition_Y = block_offset_y + $(blockElement).height();
 		
 		drawingPanel.append(blockElement);
 	}
@@ -68,11 +71,11 @@ function _SelectPainter (drawingPanel_param){
 	var paintInfo = function(info){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
 		
-		// add table name
-		$(infoElement).append("<div>" + info.table_name + "</div>");
-		
-		// add column name
-		$(infoElement).append("<div class=\"column\">" + info.column_name + "</div>");
+		switch(info.type){
+		case "ColumnInfo":
+			setContents_Column(infoElement, info);
+			break;
+		}
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
 		$(infoElement).offset({top: last_offset_y, left: last_offset_x});
@@ -102,5 +105,13 @@ function _SelectPainter (drawingPanel_param){
 		
 		// update last_offset x, y
 		last_offset_x = last_offset_x + $(infoElement).width() + ELEMENT_OUTER_MARGIN_X;
+	}
+	
+	var setContents_Column = function(infoElement, info){
+		// add table name
+		$(infoElement).append("<div>" + info.table_name + "</div>");
+		
+		// add column name
+		$(infoElement).append("<div class=\"column\">" + info.column_name + "</div>");
 	}
 }

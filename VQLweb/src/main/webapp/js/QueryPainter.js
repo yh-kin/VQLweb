@@ -21,11 +21,11 @@ function _QueryPainter(drawingPanel_ID){
 		selectPainter.paint(queryInfo.select_info_list, offset_x, offset_y);
 		// setting next offset
 		offset_x = 0;
-		offset_y = selectPainter.getLastOffset_y() + STATEMENT_MARGIN;
+		offset_y = selectPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
 		
-//		fromPainter.paint(queryInfo.select_info_list, offset_x, offset_y);
-//		// setting next offset
-//		offset_x = 0;
-//		offset_y = fromPainter.getLastOffset_y() + STATEMENT_MARGIN;
+		fromPainter.paint(queryInfo.from_info_list, offset_x, offset_y);
+		// setting next offset
+		offset_x = 0;
+		offset_y = fromPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
 	}
 }

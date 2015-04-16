@@ -5,24 +5,28 @@ function _FromPainter (drawingPanel_param){
 	
 	const STATEMENT_NAME = "from";
 	
-	const ELEMENT_INNER_MARGIN = 10;
-	const ELEMENT_OUTER_MARGIN = 20;
+	const ELEMENT_INNER_MARGIN_X = 10;
+	const ELEMENT_INNER_MARGIN_Y = 0;
+	
+	const ELEMENT_OUTER_MARGIN_X = 20;
+	const ELEMENT_OUTER_MARGIN_Y = 20;
 
 	const MIN_ELEMENT_WIDTH = 100;
 	const MAX_SELECT_WIDTH = 200;
 	
-	const ELEMENT_HEIGHT = 50;
+	const ELEMENT_HEIGHT = 40;
 	
 	const ELEMENT_DEFAULT_OFFSET_X = 30;
-	const ELEMENT_DEFAULT_OFFSET_Y = 10;
 
 	var last_offset_x = ELEMENT_DEFAULT_OFFSET_X;
-	var last_offset_y = ELEMENT_DEFAULT_OFFSET_Y;
+	var last_offset_y = 40;
+	
+	var blockElementEndPosition_Y = 0;
 	
 	var drawingPanel = drawingPanel_param;
 	
-	this.getBlockEnd_y = function(){
-		return last_offset_y;
+	this.getBlockEndPosition_Y = function(){
+		return blockElementEndPosition_Y;
 	}
 	
 	this.paint = function(infoList, block_offset_x, block_offset_y){
@@ -41,11 +45,10 @@ function _FromPainter (drawingPanel_param){
 			paintInfo(infoList[i]);
 		}
 		
-		// TODO
 		paint_statementBlock(block_offset_x, block_offset_y);
 	}
 	
-	// SELECT Statement Block 그리기
+	// FROM Statement Block 그리기
 	var paint_statementBlock = function(block_offset_x, block_offset_y){
 		var blockElement = $("<div class=\"block " + STATEMENT_NAME + "\"></div>");
 
@@ -56,11 +59,11 @@ function _FromPainter (drawingPanel_param){
 		blockElement.append("<div class=\"space\"></div>");
 
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
-		blockElement.offset({top: last_offset_y, left: last_offset_x});
+		blockElement.offset({top: block_offset_y, left: block_offset_x});
 		
-		// TODO 임시
-		$(blockElement).width(150);
-		$(blockElement).height(height);
+		// 최종 Element offset(Y) - Block 시작 offset(Y) + Element Height + Element 외부 margin(Y)
+		$(blockElement).height(last_offset_y - block_offset_y + ELEMENT_HEIGHT + ELEMENT_OUTER_MARGIN_Y);
+		blockElementEndPosition_Y = block_offset_y + $(blockElement).height();
 		
 		drawingPanel.append(blockElement);
 	}
@@ -68,11 +71,15 @@ function _FromPainter (drawingPanel_param){
 	var paintInfo = function(info){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
 		
-		// add table name
-		infoElement.append("<div>" + info.table_name + "</div>");
-		
-		// add column name
-		infoElement.append("<div class=\"column\">" + info.column_name + "</div>");
+		switch(info.type){
+		case "SubQueryInfo":
+			setContents_Subquery(infoElement, info);
+			break;
+			
+		case "TableInfo":
+			setContents_Table(infoElement, info);
+			break;
+		}
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
 		infoElement.offset({top: last_offset_y, left: last_offset_x});
@@ -80,7 +87,7 @@ function _FromPainter (drawingPanel_param){
 		drawingPanel.append(infoElement);
 		
 		// set width
-		var width = infoElement.width() + ELEMENT_INNER_MARGIN;
+		var width = infoElement.width() + ELEMENT_INNER_MARGIN_X;
 		if(width < MIN_ELEMENT_WIDTH){
 			width = MIN_ELEMENT_WIDTH;
 			
@@ -89,9 +96,35 @@ function _FromPainter (drawingPanel_param){
 			
 		}
 		infoElement.width(width);
+		$(infoElement).height(ELEMENT_HEIGHT);
 		
+		// re-positioning
+		if(($(infoElement).position().left + width) >= $(drawingPanel).width()){
+			last_offset_x = ELEMENT_DEFAULT_OFFSET_X;
+			last_offset_y = $(infoElement).position().top + $(infoElement).height() + ELEMENT_OUTER_MARGIN_Y;
+			
+			var parentOffset = $(drawingPanel).offset();
+			
+			$(infoElement).offset({top: parentOffset.top + last_offset_y, left: parentOffset.left + last_offset_x});
+		}
 		
 		// update last_offset x, y
-		last_offset_x = last_offset_x + infoElement.width() + ELEMENT_OUTER_MARGIN;
+		last_offset_x = last_offset_x + $(infoElement).width() + ELEMENT_OUTER_MARGIN_X;
+	}
+	
+	var setContents_Subquery = function(infoElement, info){
+		// add subquery alias
+		infoElement.append("<div class=\"alias\">" + info.alias + "</div>");
+		
+		// add subquery ID
+		infoElement.append("<div class=\"subquery_id\">" + info.query_id + "</div>");
+	}
+	
+	var setContents_Table = function(infoElement, info){
+		// add subquery alias
+		infoElement.append("<div class=\"alias\">" + info.alias + "</div>");
+		
+		// add subquery ID
+		infoElement.append("<div class=\"table_name\">" + info.table_name + "</div>");
 	}
 }
