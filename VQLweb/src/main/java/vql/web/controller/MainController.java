@@ -25,28 +25,28 @@ public class MainController {
 	
 	@RequestMapping("/inputQuery")
 	public ModelAndView queryInput() {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
 		
-		mv.setViewName("inputQuery");
-		return mv;
+		modelAndView.setViewName("inputQuery");
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public ModelAndView home(WebRequest webRequest, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
 		
 		String queryString = webRequest.getParameter("queryString");
 		
-		VisualizeService vs = new VisualizeService();
-		QueryFactory qf = null;
+		VisualizeService visualizeService = new VisualizeService();
+		QueryFactory queryFactory = null;
 		try {
-			qf = vs.getVisualQueryInfo(queryString);
+			queryFactory = visualizeService.getVisualQueryInfo(queryString);
 			
-			String convertedQueryInfoString = vs.convertQueryInfoToMap(qf.getMainQueryInfo());
+			String convertedQueryInfoString = visualizeService.convertQueryInfoToMap(queryFactory.getMainQueryInfo());
 			
-			mv.addObject("mainQueryInfo", convertedQueryInfoString);
+			modelAndView.addObject("mainQueryInfo", convertedQueryInfoString);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -54,10 +54,10 @@ public class MainController {
 		}
 		
 		// TODO 임시 확인용
-		mv.addObject("queryString", queryString);
+		modelAndView.addObject("queryString", queryString);
 		
-		mv.setViewName("main");
+		modelAndView.setViewName("main");
 		
-		return mv;
+		return modelAndView;
 	}
 }
