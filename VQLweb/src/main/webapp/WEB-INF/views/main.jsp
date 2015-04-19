@@ -42,7 +42,7 @@
 	  <h1>VQLweb<small> (ver.${version})</small></h1>
 	</div>
 	
-	<div>
+	<div class ="well">
 		${queryString}
 	</div>
 	

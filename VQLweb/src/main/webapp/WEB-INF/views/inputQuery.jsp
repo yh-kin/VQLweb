@@ -32,13 +32,12 @@
 	<form action="main" method="POST" class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-8 col-md-offset-2">
-				<textarea name="queryString" class="form-control" rows="15" placeholder="Input your SQL To Visualize"></textarea>
+				<textarea name="queryString" class="form-control" rows="15" placeholder="Input your SQL To Visualize">
+SELECT EMP.SAL, EMP.ENAME, DEPT.DNAME, DEPT.LOC, 7, 'TEST' FROM EMP, DEPT
+				</textarea>
 			</div>
 		</div>
 		<div class="form-group">
-			<!--
-			<div class="col-md-3 pull-right">
-			-->
 			<div class="col-md-1 col-md-offset-9">
 				<button type="submit" class="btn btn-default btn-success btn-block">Go!</button>
 			</div>
