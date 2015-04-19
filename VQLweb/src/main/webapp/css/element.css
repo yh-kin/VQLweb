@@ -39,7 +39,7 @@ div.element{
 /* ELEMENT COMMON CSS -END */
 
 /* SELECT ELEMENT CSS -BEGIN */
-div.select div.column{
+div.select div.column_name{
 	text-align: center;
 }
 /* SELECT ELEMENT CSS -END */

@@ -1,21 +1,21 @@
-function _SelectPainter (drawingPanel_param){
+function _WherePainter (drawingPanel_param){
 	if(drawingPanel_param == undefined || drawingPanel_param.length == 0){
 		console.error("drawing_panel: [" + drawingPanel_param + "] is inappropriate!");
 	}
 	
-	const STATEMENT_NAME = "select";
+	const STATEMENT_NAME = "where";
 	
 	const ELEMENT_INNER_MARGIN_X = 10;
 	const ELEMENT_INNER_MARGIN_Y = 0;
 	
 	const ELEMENT_OUTER_MARGIN_X = 20;
 	const ELEMENT_OUTER_MARGIN_Y = 20;
-	
+
 	const MIN_ELEMENT_WIDTH = 100;
 	const MAX_SELECT_WIDTH = 200;
 	
 	const ELEMENT_HEIGHT = 40;
-
+	
 	const ELEMENT_DEFAULT_OFFSET_X = 30;
 
 	var last_offset_x = ELEMENT_DEFAULT_OFFSET_X;
@@ -48,7 +48,7 @@ function _SelectPainter (drawingPanel_param){
 		paint_statementBlock(block_offset_x, block_offset_y);
 	}
 	
-	// SELECT Statement Block 그리기
+	// WHERE Statement Block 그리기
 	var paint_statementBlock = function(block_offset_x, block_offset_y){
 		var blockElement = $("<div class=\"block " + STATEMENT_NAME + "\"></div>");
 
@@ -72,40 +72,30 @@ function _SelectPainter (drawingPanel_param){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
 		
 		switch(info.type){
-		case "ColumnInfo":
-			setContents_Column(infoElement, info);
-			break;
-			
-		case "ConstInfo":
-			setContents_Const(infoElement, info);
-			break;
-			
-		case "FunctionInfo": // TODO 현재 임시 처리중..
-			setContents_Function(infoElement, info);
-			break;
-			
-		case "SubQueryInfo": // TODO 현재 임시 처리중..
+		case "SubQueryInfo":
+			setContents_Subquery(infoElement, info);
 			break;
 			
 		case "TableInfo":
-			Console.error("SELECT statement CANNOT have TableInfo!!");
+			setContents_Table(infoElement, info);
 			break;
 		}
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
-		$(infoElement).offset({top: last_offset_y, left: last_offset_x});
+		infoElement.offset({top: last_offset_y, left: last_offset_x});
 		
 		drawingPanel.append(infoElement);
 		
 		// set width
-		var width = $(infoElement).width() + ELEMENT_INNER_MARGIN_X;
+		var width = infoElement.width() + ELEMENT_INNER_MARGIN_X;
 		if(width < MIN_ELEMENT_WIDTH){
 			width = MIN_ELEMENT_WIDTH;
 			
 		} else if(width > MAX_SELECT_WIDTH){
 			width = MAX_SELECT_WIDTH;
+			
 		}
-		$(infoElement).width(width);
+		infoElement.width(width);
 		$(infoElement).height(ELEMENT_HEIGHT);
 		
 		// re-positioning
@@ -120,26 +110,5 @@ function _SelectPainter (drawingPanel_param){
 		
 		// update last_offset x, y
 		last_offset_x = last_offset_x + $(infoElement).width() + ELEMENT_OUTER_MARGIN_X;
-	}
-	
-	var setContents_Column = function(infoElement, info){
-		// add table name
-		$(infoElement).append("<div class=\"table_name\">" + info.table_name + "</div>");
-		
-		// add column name
-		$(infoElement).append("<div class=\"column_name\">" + info.column_name + "</div>");
-	}
-	
-	var setContents_Const = function(infoElement, info){
-		// add table name
-		$(infoElement).append("<div class=\"type_name\">" + info.type_name + "</div>");
-		
-		// add column name
-		$(infoElement).append("<div class=\"const_value\">" + info.const_value + "</div>");
-	}
-	
-	// TODO 현재 function은 임시로 text그대로 보여주고 있음.
-	var setContents_Function = function(infoElement, info){
-		$(infoElement).append("<div class=\"function_text\">" + info.function_text + "</div>");
 	}
 }

@@ -7,6 +7,8 @@ import java.util.Map;
 
 import queryParser.executor.Executor;
 import queryParser.vo.ColumnInfo;
+import queryParser.vo.ConstInfo;
+import queryParser.vo.FunctionInfo;
 import queryParser.vo.QueryComponentType;
 import queryParser.vo.QueryFactory;
 import queryParser.vo.QueryInfo;
@@ -55,6 +57,27 @@ public class VisualizeService {
 				
 				selectInfoMap.put("table_name", columnInfo.getTableName());
 				selectInfoMap.put("column_name", columnInfo.getColumnName());
+				break;
+				
+			case "ConstInfo":
+				ConstInfo constInfo = (ConstInfo)queryComponent;
+				
+				selectInfoMap.put("type_name", constInfo.getTypeName());
+				selectInfoMap.put("const_value", constInfo.getConstValue());
+				break;
+				
+			case "FunctionInfo":
+				FunctionInfo functionInfo = (FunctionInfo)queryComponent;
+				
+				// TODO Function은 functionText 그대로 보여줄 것인가?
+				selectInfoMap.put("function_text", functionInfo.getFunctionText());
+				break;
+				
+			case "SubQueryInfo":
+				break;
+				
+			case "TableInfo":
+				// TODO SELECT info에서는 TableInfo가 올 수 없다.
 				break;
 			}
 			
