@@ -13,9 +13,12 @@
 <script src="static/javascript/jquery-2.1.3.min.js"></script>
 <script src="static/javascript/bootstrap.min.js"></script>
 
+<!-- Sample Defualt Query String -->
+<script src="sampleQuery.js"></script>
+
 <script>
 	$(function(){
-		
+		$("#queryString").val(_sampleQuery);
 	})
 </script>
 
@@ -32,9 +35,7 @@
 	<form action="main" method="POST" class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-8 col-md-offset-2">
-				<textarea name="queryString" class="form-control" rows="15" placeholder="Input your SQL To Visualize">
-SELECT EMP.SAL, EMP.ENAME, DEPT.DNAME, DEPT.LOC, 7, 'TEST' FROM EMP, DEPT
-				</textarea>
+				<textarea id="queryString" name="queryString" class="form-control" rows="15" placeholder="Input your SQL To Visualize"></textarea>
 			</div>
 		</div>
 		<div class="form-group">

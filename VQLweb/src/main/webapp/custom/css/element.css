@@ -26,6 +26,7 @@ div.block{
 
 div.block > div.name{
 	font-weight: bold;
+	margin-left: 5px;
 }
 /* BLOCK ELEMENT CSS -END */
 

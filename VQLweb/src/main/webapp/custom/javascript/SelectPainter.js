@@ -70,26 +70,34 @@ function _SelectPainter (drawingPanel_param){
 	
 	var paintInfo = function(info){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
-		
+
+		var drawer = undefined;
 		switch(info.type){
 		case "ColumnInfo":
-			setContents_Column(infoElement, info);
+			drawer = setContents_Column;
 			break;
 			
 		case "ConstInfo":
-			setContents_Const(infoElement, info);
+			drawer = setContents_Const;
 			break;
 			
 		case "FunctionInfo": // TODO 현재 임시 처리중..
-			setContents_Function(infoElement, info);
+			drawer = setContents_Function;
 			break;
 			
 		case "SubQueryInfo": // TODO 현재 임시 처리중..
+			drawer = setContents_Subquery;
 			break;
 			
 		case "TableInfo":
 			Console.error("SELECT statement CANNOT have TableInfo!!");
 			break;
+		}
+		
+		if(drawer == undefined){
+			console.error("INVALID SelectInfo Type!!");
+		}else{
+			drawer(infoElement, info);
 		}
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
@@ -122,6 +130,7 @@ function _SelectPainter (drawingPanel_param){
 		last_offset_x = last_offset_x + $(infoElement).width() + ELEMENT_OUTER_MARGIN_X;
 	}
 	
+	// drawing Column Contents
 	var setContents_Column = function(infoElement, info){
 		// add table name
 		$(infoElement).append("<div class=\"table_name\">" + info.table_name + "</div>");
@@ -130,6 +139,7 @@ function _SelectPainter (drawingPanel_param){
 		$(infoElement).append("<div class=\"column_name\">" + info.column_name + "</div>");
 	}
 	
+	// drawing Constant Contents
 	var setContents_Const = function(infoElement, info){
 		// add table name
 		$(infoElement).append("<div class=\"type_name\">" + info.type_name + "</div>");
@@ -138,8 +148,18 @@ function _SelectPainter (drawingPanel_param){
 		$(infoElement).append("<div class=\"const_value\">" + info.const_value + "</div>");
 	}
 	
+	// drawing Function Contents
 	// TODO 현재 function은 임시로 text그대로 보여주고 있음.
 	var setContents_Function = function(infoElement, info){
 		$(infoElement).append("<div class=\"function_text\">" + info.function_text + "</div>");
+	}
+	
+	// drawing SubQuery Contents
+	var setContents_Subquery = function(infoElement, info){
+		// add subquery alias
+		infoElement.append("<div class=\"alias\">" + info.alias + "</div>");
+		
+		// add subquery ID
+		infoElement.append("<div class=\"subquery_id\">" + info.query_id + "</div>");
 	}
 }

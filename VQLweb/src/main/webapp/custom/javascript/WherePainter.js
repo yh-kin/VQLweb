@@ -71,14 +71,21 @@ function _WherePainter (drawingPanel_param){
 	var paintInfo = function(info){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
 		
+		var drawer = undefined;
 		switch(info.type){
 		case "SubQueryInfo":
-			setContents_Subquery(infoElement, info);
+			drawer = setContents_Subquery;
 			break;
 			
 		case "TableInfo":
-			setContents_Table(infoElement, info);
+			drawer = setContents_Table;
 			break;
+		}
+		
+		if(drawer == undefined){
+			console.error("INVALID WhereInfo Type!!");
+		}else{
+			drawer(infoElement, info);
 		}
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
