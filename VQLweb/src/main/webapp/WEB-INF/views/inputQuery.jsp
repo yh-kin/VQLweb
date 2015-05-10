@@ -4,14 +4,14 @@
 <html>
 <head>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="static/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="static/javascript/jquery-2.1.3.min.js"></script>
+<script src="static/javascript/bootstrap.min.js"></script>
 
 <script>
 	$(function(){

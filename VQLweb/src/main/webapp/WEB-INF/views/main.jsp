@@ -5,23 +5,23 @@
 <head>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="static/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="static/javascript/jquery-2.1.3.min.js"></script>
+<script src="static/javascript/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="css/bootstrap.vertical-tabs.css">
+<link rel="stylesheet" href="static/css/bootstrap.vertical-tabs.css">
 
 <!-- User Defined -->
-<link rel="stylesheet" href="css/element.css">
+<link rel="stylesheet" href="custom/css/element.css">
 
-<script src="js/QueryPainter.js"></script>
-<script src="js/SelectPainter.js"></script>
-<script src="js/FromPainter.js"></script>
+<script src="custom/javascript/QueryPainter.js"></script>
+<script src="custom/javascript/SelectPainter.js"></script>
+<script src="custom/javascript/FromPainter.js"></script>
 
 <script>
 	var queryInfo = ${mainQueryInfo};
