@@ -19,7 +19,7 @@ public class VisualizeService {
 	}
 	
 	public String convertQueryInfoToMap(QueryInfo queryInfo) throws JsonProcessingException{
-		Map<String, List<Map<String, Object>>> queryInfoMap = new HashMap<String, List<Map<String, Object>>>();
+		Map<String, Object> queryInfoMap = new HashMap<String, Object>();
 		
 		// SELECT
 		List<Map<String, Object>> selectInfoMap = SelectInfoConverter.convertInfoToMap(queryInfo.getSelectStmtInfo());
@@ -30,8 +30,8 @@ public class VisualizeService {
 		queryInfoMap.put("from_info_list", fromInfoMap);
 		
 		// WHERE
-		List<Map<String, Object>> whereInfoMap = WhereInfoConverter.convertInfoToMap(queryInfo.getWhereStmtInfo());
-		queryInfoMap.put("where_info_list", whereInfoMap);
+		Map<String, Object> whereInfoMap = WhereInfoConverter.convertInfoToMap(queryInfo.getWhereStmtInfo());
+		queryInfoMap.put("where_info", whereInfoMap);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(queryInfoMap);

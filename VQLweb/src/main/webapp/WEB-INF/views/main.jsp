@@ -19,9 +19,11 @@
 <!-- User Defined -->
 <link rel="stylesheet" href="custom/css/element.css">
 
+<script src="custom/javascript/PaintingTechniques.js"></script>
 <script src="custom/javascript/QueryPainter.js"></script>
 <script src="custom/javascript/SelectPainter.js"></script>
 <script src="custom/javascript/FromPainter.js"></script>
+<script src="custom/javascript/WherePainter.js"></script>
 
 <script>
 	var queryInfo = ${mainQueryInfo};

@@ -29,21 +29,19 @@ function _WherePainter (drawingPanel_param){
 		return blockElementEndPosition_Y;
 	}
 	
-	this.paint = function(infoList, block_offset_x, block_offset_y){
-		if(infoList == undefined){
-			console.error(STATEMENT_NAME + " infoList: [" + infoList + "] is inappropriate!");
+	this.paint = function(info, block_offset_x, block_offset_y){
+		if(info == undefined){
+			console.error(STATEMENT_NAME + " info: [" + info + "] is inappropriate!");
 			
-		}else if(infoList.length == 0){
-			console.debug(STATEMENT_NAME + "infoList is EMPTY!");
+		}else if(info.length == 0){
+			console.debug(STATEMENT_NAME + "info is EMPTY!");
 		}
 		
-		// set offset
+		// inner element offset = last time offset(in this time, set initial value) + offset of block 
 		last_offset_x = last_offset_x + block_offset_x;
 		last_offset_y = last_offset_y + block_offset_y;
 		
-		for(var i = 0; i < infoList.length; i++){
-			paintInfo(infoList[i]);
-		}
+		paintInfo(info);
 		
 		paint_statementBlock(block_offset_x, block_offset_y);
 	}
@@ -69,24 +67,17 @@ function _WherePainter (drawingPanel_param){
 	}
 	
 	var paintInfo = function(info){
-		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
-		
-		var drawer = undefined;
-		switch(info.type){
-		case "SubQueryInfo":
-			drawer = setContents_Subquery;
-			break;
+		var infoElement = $("<div class=\"condition_list " + STATEMENT_NAME + "\"></div>");
+
+		if(info.type == "WhereInfo"){
+			_paintElement(infoElement, info);
 			
-		case "TableInfo":
-			drawer = setContents_Table;
-			break;
+		}else{
+			
 		}
 		
-		if(drawer == undefined){
-			console.error("INVALID WhereInfo Type!!");
-		}else{
-			drawer(infoElement, info);
-		}
+		// TODO 초기 positioning 하고 width 설정하고 다시 re-positioning하는거
+		// refactoring이 필요할 듯.
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
 		infoElement.offset({top: last_offset_y, left: last_offset_x});

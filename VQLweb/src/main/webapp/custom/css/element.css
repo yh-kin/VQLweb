@@ -44,3 +44,10 @@ div.select div.column_name{
 	text-align: center;
 }
 /* SELECT ELEMENT CSS -END */
+
+/* WHERE ELEMENT CSS -BEGIN */
+div.condition_list{
+	display: inline-block;
+	position: absolute;
+}
+/* WHERE ELEMENT CSS -END */

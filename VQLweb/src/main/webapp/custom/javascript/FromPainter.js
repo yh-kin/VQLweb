@@ -37,7 +37,7 @@ function _FromPainter (drawingPanel_param){
 			console.debug(STATEMENT_NAME + "infoList is EMPTY!");
 		}
 		
-		// set offset
+		// inner element offset = last time offset(in this time, set initial value) + offset of block
 		last_offset_x = last_offset_x + block_offset_x;
 		last_offset_y = last_offset_y + block_offset_y;
 		
@@ -71,22 +71,15 @@ function _FromPainter (drawingPanel_param){
 	var paintInfo = function(info){
 		var infoElement = $("<div class=\"element " + STATEMENT_NAME + "\"></div>");
 
-		var drawer = undefined;
 		switch(info.type){
 		case "SubQueryInfo":
-			drawer = setContents_Subquery;
-			break;
-			
 		case "TableInfo":
-			drawer = setContents_Table;
+			_paintElement(infoElement, info);
 			break;
 		}
 		
-		if(drawer == undefined){
-			console.error("INVALID FromInfo Type!!");
-		}else{
-			drawer(infoElement, info);
-		}
+		// TODO 초기 positioning 하고 width 설정하고 다시 re-positioning하는거
+		// refactoring이 필요할 듯.
 		
 		// 왜인지는 모르지만 append하기 전에 offset을 설정해야 제대로 먹힘.
 		infoElement.offset({top: last_offset_y, left: last_offset_x});
@@ -117,21 +110,5 @@ function _FromPainter (drawingPanel_param){
 		
 		// update last_offset x, y
 		last_offset_x = last_offset_x + $(infoElement).width() + ELEMENT_OUTER_MARGIN_X;
-	}
-	
-	var setContents_Subquery = function(infoElement, info){
-		// add subquery alias
-		infoElement.append("<div class=\"alias\">" + info.alias + "</div>");
-		
-		// add subquery ID
-		infoElement.append("<div class=\"subquery_id\">" + info.query_id + "</div>");
-	}
-	
-	var setContents_Table = function(infoElement, info){
-		// add subquery alias
-		infoElement.append("<div class=\"alias\">" + info.alias + "</div>");
-		
-		// add subquery ID
-		infoElement.append("<div class=\"table_name\">" + info.table_name + "</div>");
 	}
 }

@@ -12,6 +12,7 @@ function _QueryPainter(drawingPanel_ID){
 	
 	var selectPainter = new _SelectPainter(drawingPanel);
 	var fromPainter = new _FromPainter(drawingPanel);
+	var wherePainter = new _WherePainter(drawingPanel);
 
 	this.paint = function(queryInfo){
 		if(queryInfo == undefined){
@@ -27,5 +28,11 @@ function _QueryPainter(drawingPanel_ID){
 		// setting next offset
 		offset_x = 0;
 		offset_y = fromPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+		
+		wherePainter.paint(queryInfo.where_info, offset_x, offset_y);
+		// setting next offset
+		offset_x = 0;
+		offset_y = wherePainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+ 
 	}
 }

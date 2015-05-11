@@ -1,6 +1,8 @@
 package vql.web.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import queryParser.vo.ColumnInfo;
@@ -10,6 +12,7 @@ import queryParser.vo.FunctionInfo;
 import queryParser.vo.SubQueryInfo;
 import queryParser.vo.TableInfo;
 import queryParser.vo.WhereInfo;
+import queryParser.vo.WhereType;
 
 public class InfoConverter {
 	public static Map<String, Object> convertInfoToMap(Object obj){
@@ -67,6 +70,13 @@ public class InfoConverter {
 			WhereInfo whereInfo = (WhereInfo)obj;
 			
 			infoMap.put("lgcl_op", whereInfo.getLogicalOp());
+			
+			List<Map<String, Object>> conditionInfoMapList = new ArrayList<Map<String,Object>>();
+			for(WhereType whereType: whereInfo.getValueList()){
+				Map<String, Object> conditionInfoMap = convertInfoToMap(whereType);
+				conditionInfoMapList.add(conditionInfoMap);
+			}
+			infoMap.put("condition_list", conditionInfoMapList);
 			break;
 		}
 		

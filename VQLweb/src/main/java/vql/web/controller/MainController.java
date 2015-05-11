@@ -1,7 +1,5 @@
 package vql.web.controller;
 
-import java.io.File;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import queryParser.Comm.QueryCommVar;
-import queryParser.parser.TempQueryInput;
 import queryParser.vo.QueryFactory;
 import vql.web.service.VisualizeService;
 
