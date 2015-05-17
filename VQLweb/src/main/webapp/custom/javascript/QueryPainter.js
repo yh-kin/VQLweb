@@ -19,22 +19,12 @@ function _QueryPainter(drawingPanel_ID){
 			console.error("queryInfo: [" + queryInfo + "] is inappropriate!");
 		}
 		
-		selectPainter.paint(queryInfo.select_info_list, offset_x, offset_y);
-		// setting next offset
-		offset_x = 0;
-		offset_y = selectPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+		selectPainter.paint(queryInfo.select_info_list);
 		
-		fromPainter.paint(queryInfo.from_info_list, offset_x, offset_y);
-		// setting next offset
-		offset_x = 0;
-		offset_y = fromPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
-		
+		fromPainter.paint(queryInfo.from_info_list);
+
 		if(queryInfo.where_info != undefined){
-			wherePainter.paint(queryInfo.where_info, offset_x, offset_y);
-			// setting next offset
-			offset_x = 0;
-			offset_y = wherePainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+			wherePainter.paint(queryInfo.where_info);
 		}
- 
 	}
 }

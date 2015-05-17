@@ -16,7 +16,14 @@
 
 <link rel="stylesheet" href="static/css/bootstrap.vertical-tabs.css">
 
+
 <!-- User Defined -->
+<link rel="stylesheet/less" href="custom/css/queryInfo.less">
+<link rel="stylesheet/less" href="custom/css/selectInfo.less">
+<link rel="stylesheet/less" href="custom/css/fromInfo.less">
+<link rel="stylesheet/less" href="custom/css/whereInfo.less">
+<script src="static/javascript/less.min.js"></script>
+
 <link rel="stylesheet" href="custom/css/element.css">
 
 <script src="custom/javascript/PaintingTechniques.js"></script>
