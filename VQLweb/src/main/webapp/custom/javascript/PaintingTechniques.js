@@ -90,27 +90,35 @@ function __table_DrawingTechnique(infoElement, info){
 }
 
 function __condition_DrawingTechnique(infoElement, info){
+	var element = $("<div class=\"condition\"></div>");
+	
 	// add source element
 	var sourceElement = $("<div class=\"source\"></div>");
 	_paintElement(sourceElement, info.source);
-	$(infoElement).append(sourceElement);
+	$(element).append(sourceElement);
 	
 	// add relational operation
-	$(infoElement).append("<div class=\"copr_op\">" + info.copr_op + "</div>");
+	$(element).append("<div class=\"copr_op\">" + info.copr_op + "</div>");
 	
 	// add target element
 	var targetElement = $("<div class=\"target\"></div>");
 	_paintElement(targetElement, info.target);
-	$(infoElement).append(targetElement);
+	$(element).append(targetElement);
+	
+	$(infoElement).append(element);
 }
 
 function __where_DrawingTechnique(infoElement, info){
 	// basic where div
-	var element = $("<div class=\"lgcl_op\">" + info.lgcl_op + "</div>");
+	var element = $("<div class=\"lgcl_op\"></div>");
+	
+	$(element).append("<div class=\"name\">" + info.lgcl_op + "</div>"); // lgcl_op name
+	$(element).append("<div class=\"area\"></div>"); // lgcl_op area
 
 	// condition info drawing_technique
 	for(var i = 0; i < info.condition_list.length; i++){
-		_paintElement(element, info.condition_list[i]);
+		// area에 condition과 자식 whereInfo를 넣는다.
+		_paintElement($(element).find(".area"), info.condition_list[i]);
 	}
 	
 	$(infoElement).append(element);

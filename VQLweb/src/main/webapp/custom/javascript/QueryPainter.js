@@ -29,10 +29,12 @@ function _QueryPainter(drawingPanel_ID){
 		offset_x = 0;
 		offset_y = fromPainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
 		
-		wherePainter.paint(queryInfo.where_info, offset_x, offset_y);
-		// setting next offset
-		offset_x = 0;
-		offset_y = wherePainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+		if(queryInfo.where_info != undefined){
+			wherePainter.paint(queryInfo.where_info, offset_x, offset_y);
+			// setting next offset
+			offset_x = 0;
+			offset_y = wherePainter.getBlockEndPosition_Y() + STATEMENT_MARGIN;
+		}
  
 	}
 }
