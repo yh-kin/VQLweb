@@ -30,8 +30,10 @@ public class VisualizeService {
 		queryInfoMap.put("from_info_list", fromInfoMap);
 		
 		// WHERE
-		Map<String, Object> whereInfoMap = WhereInfoConverter.convertInfoToMap(queryInfo.getWhereStmtInfo());
-		queryInfoMap.put("where_info", whereInfoMap);
+		if(queryInfo.getWhereStmtInfo() != null){
+			Map<String, Object> whereInfoMap = WhereInfoConverter.convertInfoToMap(queryInfo.getWhereStmtInfo());
+			queryInfoMap.put("where_info", whereInfoMap);
+		}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(queryInfoMap);

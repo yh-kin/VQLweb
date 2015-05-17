@@ -37,17 +37,50 @@ div.element{
 	display: inline-block;
 	position: absolute;
 }
-/* ELEMENT COMMON CSS -END */
 
-/* SELECT ELEMENT CSS -BEGIN */
-div.select div.column_name{
+div.column_name{
 	text-align: center;
 }
-/* SELECT ELEMENT CSS -END */
+/* ELEMENT COMMON CSS -END */
 
 /* WHERE ELEMENT CSS -BEGIN */
 div.condition_list{
 	display: inline-block;
 	position: absolute;
+}
+
+div.lgcl_op div.name{
+	width: 70px;
+	height: 35px;
+	border-radius: 5px;
+	border: 3px solid black;
+	position: absolute;
+}
+
+div.lgcl_op div.area{
+	border-radius: 5px;
+	border: 3px solid black;
+	display: inline-block;
+	position: absolute;
+	width: 45px;
+	margin-left: 25px;
+}
+
+div.condition{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	
+	/* TODO TEMP CSS */
+	width: 400px;
+}
+
+div.condition div.source,
+div.condition div.copr_op,
+div.condition div.target{
+	border-radius: 5px;
+	border: 3px solid black;
+	display: inline-block;
+	margin-left: 10px;
 }
 /* WHERE ELEMENT CSS -END */
