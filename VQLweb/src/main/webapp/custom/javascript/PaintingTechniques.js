@@ -110,9 +110,10 @@ function __condition_DrawingTechnique(infoElement, info){
 
 function __where_DrawingTechnique(infoElement, info){
 	// basic where div
-	var element = $("<div class=\"lgcl_op\"></div>");
+	var element = $("<div class=\"lgcl_op " + info.lgcl_op.toLowerCase() + "\"></div>");
 	
 	$(element).append("<div class=\"name\">" + info.lgcl_op + "</div>"); // lgcl_op name
+	$(element).append("<div class=\"cross_section\"></div>"); // empty div
 	$(element).append("<div class=\"area\"></div>"); // lgcl_op area
 
 	// condition info drawing_technique

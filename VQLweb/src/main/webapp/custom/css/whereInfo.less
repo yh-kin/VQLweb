@@ -1,3 +1,48 @@
+// Mixins -BEGIN
+.lgcl_op_name_byColor(@color){
+	width: 53px;
+	height: 35px;
+	border-radius: 5px;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
+	border-bottom: 3px solid black;
+	
+	position: absolute;
+	
+	background-color: @color;
+	
+	line-height: 29px;
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+}
+
+.lgcl_op_cross_section_byColor(@color){
+	width: 15px;
+	margin-left: 38px;
+	
+	height: 32px;
+	margin-top: 3px;
+	
+	position: absolute;
+	
+	border-bottom: 3px solid @color;
+	border-right: 3px solid @color;
+}
+
+.lgcl_op_area_byColor(@color){
+	border-radius: 5px;
+	border: 3px solid black;
+	display: inline-block;
+	width: 35px;
+	margin-left: 35px;
+	
+	padding-left: 5px;
+	
+	background-color: @color;
+}
+// Mixins -END
+
 div.block.where{
 	div.lgcl_op{
 		margin-top: 10px;
@@ -5,41 +50,49 @@ div.block.where{
 		margin-bottom: 10px;
 	}
 	
-	div.lgcl_op{
-		div.name{
-			width: 70px;
-			height: 35px;
-			border-radius: 5px;
-			border: 3px solid black;
-			position: absolute;
+	div.lgcl_op.or{
+		> div.name{
+			.lgcl_op_name_byColor(lightcoral);
 		}
 		
-		div.area{
-			border-radius: 5px;
-			border: 3px solid black;
-			display: inline-block;
-			width: 35px;
-			margin-left: 35px;
-			
-			padding-left: 5px;
+		> div.cross_section{
+			.lgcl_op_cross_section_byColor(lightcoral);
 		}
 		
-		div.area{
-			div.condition{
-				margin-top: 10px;
-				margin-bottom: 10px;
-				margin-left: 10px;
-				
-				/* TODO TEMP CSS */
-				width: 400px;
-			}
+		> div.area{
+			.lgcl_op_area_byColor(lightcoral);
+		}
+	}
+	
+	div.lgcl_op.and{
+		> div.name{
+			.lgcl_op_name_byColor(lightskyblue);
+		}
+		
+		> div.cross_section{
+			.lgcl_op_cross_section_byColor(lightskyblue);
+		}
+		
+		> div.area{
+			.lgcl_op_area_byColor(lightskyblue);
+		}
+	}
+		
+	div.lgcl_op div.area{
+		div.condition{
+			margin-top: 10px;
+			margin-bottom: 10px;
+			margin-left: 10px;
 			
-			div.condition{
-				div.source, div.copr_op, div.target{
-					border-radius: 5px;
-					border: 3px solid black;
-					display: inline-block;
-				}
+			/* TODO TEMP CSS */
+			width: 400px;
+		}
+		
+		div.condition{
+			div.source, div.copr_op, div.target{
+				border-radius: 5px;
+				border: 3px solid black;
+				display: inline-block;
 			}
 		}
 	}
