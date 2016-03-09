@@ -2,7 +2,7 @@ function _paintElement (infoElement, info){
 	var paintingTechnique = undefined;
 	
 	switch(info.type){
-	case "ColumnInfo":
+	case "ATTRIBUTE":
 		paintingTechnique = __column_DrawingTechnique;
 		break;
 		
@@ -10,33 +10,12 @@ function _paintElement (infoElement, info){
 		paintingTechnique = __const_DrawingTechnique;
 		break;
 		
-	case "FunctionInfo": // TODO 현재 임시 처리중..
-		paintingTechnique = __function_DrawingTechnique;
-		break;
-		
-	case "SubQueryInfo": // TODO 현재 임시 처리중..
-		paintingTechnique = __subquery_DrawingTechnique;
-		break;
-		
-	case "TableInfo":
-		paintingTechnique = __table_DrawingTechnique;
-		break;
-		
-	case "ConditionInfo":
-		paintingTechnique = __condition_DrawingTechnique;
-		break;
-		
-	case "WhereInfo":
-		paintingTechnique = __where_DrawingTechnique;
-		break;
+	default:
+		console.error("INVALID Painting Type!! : [" + info.type + "]");
+		return;
 	}
 	
-	if(paintingTechnique == undefined){
-		console.error("INVALID Painting Type!! : [" + info.type + "]");
-		
-	}else{
-		paintingTechnique(infoElement, info)
-	}
+	paintingTechnique(infoElement, info)
 }
 
 // drawing Column Contents

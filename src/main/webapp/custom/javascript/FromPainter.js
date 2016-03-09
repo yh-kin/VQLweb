@@ -42,12 +42,7 @@ function _FromPainter (drawingPanel_param){
 	var paintInfo = function(blockElement, info){
 		var infoElement = $("<div class=\"element\"></div>");
 
-		switch(info.type){
-		case "SubQueryInfo":
-		case "TableInfo":
-			_paintElement(infoElement, info);
-			break;
-		}
+		_paintElement(infoElement, info);
 		
 		blockElement.append(infoElement);
 	}

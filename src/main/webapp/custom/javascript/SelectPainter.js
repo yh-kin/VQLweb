@@ -42,19 +42,7 @@ function _SelectPainter (drawingPanel_param){
 	var paintInfo = function(blockElement, info){
 		var infoElement = $("<div class=\"element\"></div>");
 
-		switch(info.type){
-		case "ColumnInfo":
-		case "ConstInfo":
-		case "FunctionInfo": // TODO 현재 임시 처리중..
-		case "SubQueryInfo": // TODO 현재 임시 처리중..
-			_paintElement(infoElement, info);
-			break;
-			
-		case "TableInfo":
-			Console.error("SELECT statement CANNOT have TableInfo!!");
-			break;
-		}
-		
+		_paintElement(infoElement, info);
 		blockElement.append(infoElement);
 	}
 }

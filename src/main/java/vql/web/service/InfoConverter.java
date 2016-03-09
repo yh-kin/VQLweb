@@ -1,82 +1,33 @@
 package vql.web.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import queryParser.vo.ColumnInfo;
-import queryParser.vo.ConditionInfo;
-import queryParser.vo.ConstInfo;
-import queryParser.vo.FunctionInfo;
-import queryParser.vo.SubQueryInfo;
-import queryParser.vo.TableInfo;
-import queryParser.vo.WhereInfo;
-import queryParser.vo.WhereType;
+import type.Element;
+import vo.element.Attribute;
+import vo.element.Constant;
 
 public class InfoConverter {
-	public static Map<String, Object> convertInfoToMap(Object obj){
+	public static Map<String, Object> convertInfoToMap(Element obj){
 		Map<String, Object> infoMap = new HashMap<String, Object>();
 		
 		// Column type
-		infoMap.put("type", obj.getClass().getSimpleName());
+		infoMap.put("type", obj.getType().name());
 		
 		// Contents
-		switch(obj.getClass().getSimpleName()){
-		case "ColumnInfo":
-			ColumnInfo columnInfo = (ColumnInfo)obj;
+		switch(obj.getType()){
+		case ATTRIBUTE:
+			Attribute columnInfo = (Attribute)obj;
 			
-			infoMap.put("table_name", columnInfo.getTableName());
-			infoMap.put("column_name", columnInfo.getColumnName());
+			// TODO 일단 바로 위 parent만
+			infoMap.put("table_name", columnInfo.getParent().getName());
+			infoMap.put("column_name", columnInfo.getName());
 			break;
 			
-		case "ConstInfo":
-			ConstInfo constInfo = (ConstInfo)obj;
+		case CONSTANT:
+			Constant constInfo = (Constant)obj;
 			
-			infoMap.put("type_name", constInfo.getTypeName());
-			infoMap.put("const_value", constInfo.getConstValue());
-			break;
-			
-		case "FunctionInfo":
-			FunctionInfo functionInfo = (FunctionInfo)obj;
-			
-			// TODO Function은 functionText 그대로 보여줄 것인가?
-			infoMap.put("function_text", functionInfo.getFunctionText());
-			break;
-			
-		case "SubQueryInfo":
-			SubQueryInfo subQueryInfo = (SubQueryInfo)obj;
-			
-			infoMap.put("query_id", subQueryInfo.getCurrentQueryId());
-			infoMap.put("alias", subQueryInfo.getAlias());
-			break;
-			
-		case "TableInfo":
-			TableInfo tableInfo = (TableInfo)obj;
-			
-			infoMap.put("table_name", tableInfo.getTableName());
-			infoMap.put("alias", tableInfo.getAlias());
-			break;
-			
-		case "ConditionInfo":
-			ConditionInfo conditionInfo = (ConditionInfo)obj;
-			
-			infoMap.put("source", convertInfoToMap(conditionInfo.getSourceValue()));
-			infoMap.put("copr_op", conditionInfo.getComparisionOp().toString());
-			infoMap.put("target", convertInfoToMap(conditionInfo.getTargetValue()));
-			break;
-			
-		case "WhereInfo":
-			WhereInfo whereInfo = (WhereInfo)obj;
-			
-			infoMap.put("lgcl_op", whereInfo.getLogicalOp());
-			
-			List<Map<String, Object>> conditionInfoMapList = new ArrayList<Map<String,Object>>();
-			for(WhereType whereType: whereInfo.getValueList()){
-				Map<String, Object> conditionInfoMap = convertInfoToMap(whereType);
-				conditionInfoMapList.add(conditionInfoMap);
-			}
-			infoMap.put("condition_list", conditionInfoMapList);
+			infoMap.put("const_value", constInfo.getValue());
 			break;
 		}
 		

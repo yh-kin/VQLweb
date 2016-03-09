@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import queryParser.Comm.QueryCommVar;
-import queryParser.vo.QueryFactory;
+import vo.query.Query;
 import vql.web.service.VisualizeService;
 
 @Controller
 public class MainController {
+	
+	private static final String VERSION = "1.0.0-SNAPSHOT";
 
 	/*
 	 * 추후 json -> javascript object로 변환시
@@ -24,7 +25,7 @@ public class MainController {
 	@RequestMapping("/inputQuery")
 	public ModelAndView queryInput() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
+		modelAndView.addObject("version", VERSION);
 		
 		modelAndView.setViewName("inputQuery");
 		return modelAndView;
@@ -33,16 +34,16 @@ public class MainController {
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public ModelAndView home(WebRequest webRequest, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("version", QueryCommVar.QUERY_PARSER_VERSION);
+		modelAndView.addObject("version", VERSION);
 		
 		String queryString = webRequest.getParameter("queryString");
 		
 		VisualizeService visualizeService = new VisualizeService();
-		QueryFactory queryFactory = null;
+		Query query = null;
 		try {
-			queryFactory = visualizeService.getVisualQueryInfo(queryString);
+			query = visualizeService.getVisualQueryInfo(queryString);
 			
-			String convertedQueryInfoString = visualizeService.convertQueryInfoToMap(queryFactory.getMainQueryInfo());
+			String convertedQueryInfoString = visualizeService.convertQueryInfoToMap(query);
 			
 			modelAndView.addObject("mainQueryInfo", convertedQueryInfoString);
 			
