@@ -59,4 +59,8 @@ uploadArchives {
 
 war{
 	archiveName 'VQLweb.war'
+	
+	if (project.hasProperty('war_path')){
+		destinationDir = file(war_path)
+	}
 }
