@@ -59,7 +59,7 @@ uploadArchives {
 
 war{
 	if (project.hasProperty('archive_name')){
-		archiveName archive_name
+		archiveName archive_name+'.war'
 	}else{
 		archiveName 'VQLweb.war'
 	}

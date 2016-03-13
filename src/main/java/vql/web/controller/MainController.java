@@ -14,7 +14,7 @@ import vql.web.service.VisualizeService;
 @Controller
 public class MainController {
 	
-	private static final String VERSION = "1.0.1-SNAPSHOT";
+	private static final String VERSION = "1.0.1-SNAPSHOT 2";
 
 	/*
 	 * 추후 json -> javascript object로 변환시
