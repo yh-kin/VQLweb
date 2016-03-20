@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import vo.query.Query;
+import element.Query;
 import vql.web.service.VisualizeService;
 
 @Controller
@@ -22,7 +22,7 @@ public class MainController {
 	 * 참고해 볼 것.
 	 */
 	
-	@RequestMapping("/inputQuery")
+	@RequestMapping("/")
 	public ModelAndView queryInput() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("version", VERSION);

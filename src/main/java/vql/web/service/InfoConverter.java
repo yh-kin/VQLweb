@@ -3,9 +3,9 @@ package vql.web.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import element.Attribute;
+import element.Constant;
 import type.Element;
-import vo.element.Attribute;
-import vo.element.Constant;
 
 public class InfoConverter {
 	public static Map<String, Object> convertInfoToMap(Element obj){

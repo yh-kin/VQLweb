@@ -6,7 +6,7 @@ function _paintElement (infoElement, info){
 		paintingTechnique = __column_DrawingTechnique;
 		break;
 		
-	case "ConstInfo":
+	case "CONSTANT":
 		paintingTechnique = __const_DrawingTechnique;
 		break;
 		
@@ -29,9 +29,6 @@ function __column_DrawingTechnique(infoElement, info){
 
 // drawing Constant Contents
 function  __const_DrawingTechnique(infoElement, info){
-	// add table name
-	$(infoElement).append("<div class=\"type_name\">" + info.type_name + "</div>");
-	
 	// add column name
 	$(infoElement).append("<div class=\"const_value\">" + info.const_value + "</div>");
 }
