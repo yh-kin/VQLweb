@@ -10,6 +10,10 @@ function _paintElement (infoElement, info){
 		paintingTechnique = __const_DrawingTechnique;
 		break;
 		
+	case "CONDITION":
+		paintingTechnique = __condition_DrawingTechnique;
+		break;
+		
 	default:
 		console.error("INVALID Painting Type!! : [" + info.type + "]");
 		return;

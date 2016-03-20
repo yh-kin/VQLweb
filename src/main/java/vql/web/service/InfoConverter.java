@@ -3,6 +3,7 @@ package vql.web.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import condition.Condition;
 import element.Attribute;
 import element.Constant;
 import type.Element;
@@ -28,6 +29,15 @@ public class InfoConverter {
 			Constant constInfo = (Constant)obj;
 			
 			infoMap.put("const_value", constInfo.getValue());
+			break;
+			
+		case CONDITION:
+			Condition condition = (Condition)obj;
+			
+			infoMap.put("source", convertInfoToMap(condition.getOperand1())); // TODO 이름 operand1로 바꾸기
+			infoMap.put("copr_op", condition.getOperator().getSymbol()); // TODO 이름 operator로 바꾸기
+			infoMap.put("target", convertInfoToMap(condition.getOperand2())); // TODO 이름 operand1로 바꾸기
+			
 			break;
 		}
 		

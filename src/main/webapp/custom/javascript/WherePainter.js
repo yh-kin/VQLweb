@@ -18,7 +18,7 @@ function _WherePainter (drawingPanel_param){
 		
 		var blockElement = paint_statementBlock();
 		
-		paintInfo($(blockElement).find(".space"), info);
+		_paintElement($(blockElement).find(".space"), info);
 		
 		drawingPanel.append(blockElement);
 	}
@@ -34,15 +34,5 @@ function _WherePainter (drawingPanel_param){
 		blockElement.append("<div class=\"space\"></div>");
 
 		return blockElement;
-	}
-	
-	// "PRIVATE" painting individual element
-	var paintInfo = function(blockElement, info){
-		switch(info.type){
-		case "WhereInfo":
-		case "ConditionInfo":
-			_paintElement(blockElement, info);
-			break;
-		}
 	}
 }

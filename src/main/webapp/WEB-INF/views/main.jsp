@@ -42,7 +42,7 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>VQLweb (Ver.20150412)</title>
+<title>VQLweb (Ver.${version})</title>
 </head>
 
 <body>

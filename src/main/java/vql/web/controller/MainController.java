@@ -48,7 +48,6 @@ public class MainController {
 			modelAndView.addObject("mainQueryInfo", convertedQueryInfoString);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

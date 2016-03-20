@@ -19,9 +19,13 @@ function _QueryPainter(drawingPanel_ID){
 			console.error("queryInfo: [" + queryInfo + "] is inappropriate!");
 		}
 		
-		selectPainter.paint(queryInfo.select_info_list);
+		selectPainter.paint(queryInfo.select);
 		
-		fromPainter.paint(queryInfo.from_info_list);
+		fromPainter.paint(queryInfo.from);
+		
+		if(queryInfo.where != undefined && queryInfo.where.length == 1){
+			wherePainter.paint(queryInfo.where[0]);
+		}
 
 		if(queryInfo.where_info != undefined){
 			wherePainter.paint(queryInfo.where_info);
