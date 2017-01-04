@@ -1,0 +1,2 @@
+# VQLweb
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/81b872a447a64a78acb97fd97038c5cc)](https://www.codacy.com/app/cho-yh-kin/VQLweb?utm_source=github.com&utm_medium=referral&utm_content=yh-kin/VQLweb&utm_campaign=badger)
